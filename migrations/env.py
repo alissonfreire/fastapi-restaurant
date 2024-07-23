@@ -5,7 +5,8 @@ from alembic import context
 from sqlalchemy import engine_from_config, pool
 
 from app.helpers import load_env
-from app.models import table_registry
+from app.config.database import table_registry
+from app.models.user import User
 
 load_env()
 
