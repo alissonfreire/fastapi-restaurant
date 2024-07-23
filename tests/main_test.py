@@ -10,7 +10,7 @@ client = TestClient(app)
 def test_root_should_returns_ok_status():
     client = TestClient(app)
 
-    response = client.get("/")
+    response = client.get('/')
 
     assert response.status_code == HTTPStatus.OK
-    assert response.json() == {"hello": "world"}
+    assert response.json() == {'hello': 'world'}
