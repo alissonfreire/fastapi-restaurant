@@ -2,9 +2,12 @@ from fastapi import FastAPI, Request
 from fastapi.exceptions import HTTPException, RequestValidationError
 from fastapi.responses import JSONResponse
 
+from app.routers import auth
 from app.schemas.response_schema import ErrorResponse
 
 app = FastAPI()
+
+app.include_router(auth.router)
 
 
 @app.exception_handler(RequestValidationError)

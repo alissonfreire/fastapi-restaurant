@@ -16,3 +16,9 @@ class UserUpdateInput(BaseModel):
 class UserLoginInput(BaseModel):
     email: EmailStr = Field()
     password: str = Field()
+
+
+class UserPublic(BaseModel):
+    id: int
+    username: str
+    email: EmailStr
