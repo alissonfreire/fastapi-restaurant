@@ -1,6 +1,7 @@
 import factory
 
 from app.models.user import User
+from app.security import Security
 
 
 class UserFactory(factory.Factory):
@@ -9,4 +10,4 @@ class UserFactory(factory.Factory):
 
     username = factory.Sequence(lambda n: f'test{n}')
     email = factory.LazyAttribute(lambda obj: f'{obj.username}@test.com')
-    password = factory.LazyAttribute(lambda obj: f'{obj.username}-123456789')
+    password = Security.get_password_hash('123456789')

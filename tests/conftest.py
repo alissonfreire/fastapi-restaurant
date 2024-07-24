@@ -36,7 +36,7 @@ def session():
 
 @pytest.fixture
 def user(session):
-    user = UserFactory(password='123456789')
+    user = UserFactory()
 
     session.add(user)
     session.commit()
