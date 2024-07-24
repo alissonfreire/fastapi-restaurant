@@ -18,7 +18,10 @@ class UserRepository:
         return self.__save_and_refresh(user, True)
 
     def get_user_by_id(self, user_id: int) -> User | None:
-        return self.session.query(User).filter_by(id=user_id).first()
+        return self.get_user_by({'id': user_id})
+
+    def get_user_by(self, params: dict) -> User | None:
+        return self.session.query(User).filter_by(**params).first()
 
     def update_user(self, user_id: int, data: UserUpdateInput) -> User | None:
         user = self.get_user_by_id(user_id)
