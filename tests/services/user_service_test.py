@@ -2,21 +2,17 @@ import pytest
 from factories import UserFactory
 
 from app.models.user import User
-from app.repositories.user_repository import UserRepository
 from app.schemas.user_schema import (
     UserCreateInput,
     UserLoginInput,
     UserUpdateInput,
 )
-from app.security import Security
 from app.services.user_service import UserService
 
 
 @pytest.fixture
 def user_service(session):
-    return UserService(
-        user_repo=UserRepository(session=session), security=Security
-    )
+    return UserService(session=session)
 
 
 def create_many_users(session, number=5):

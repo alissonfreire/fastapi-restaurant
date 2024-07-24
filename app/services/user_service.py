@@ -1,5 +1,7 @@
 from typing import List, Tuple
 
+from sqlalchemy.orm import Session
+
 from app.models.user import User
 from app.repositories.user_repository import UserRepository
 from app.schemas.user_schema import (
@@ -11,9 +13,9 @@ from app.security import Security
 
 
 class UserService:
-    def __init__(self, user_repo: UserRepository, security: Security):
-        self.user_repo = user_repo
-        self.security = security
+    def __init__(self, session: Session):
+        self.user_repo = UserRepository(session=session)
+        self.security = Security()
 
     def get_all_users(self) -> List[User]:
         return self.user_repo.get_all_users()
