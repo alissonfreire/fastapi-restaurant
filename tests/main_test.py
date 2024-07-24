@@ -3,16 +3,11 @@ from http import HTTPStatus
 import pytest
 from fastapi import HTTPException
 from fastapi.exceptions import RequestValidationError
-from fastapi.testclient import TestClient
 
-from app.main import app, http_exception_handler, validation_exception_handler
-
-client = TestClient(app)
+from app.main import http_exception_handler, validation_exception_handler
 
 
-def test_root_should_returns_ok_status():
-    client = TestClient(app)
-
+def test_root_should_returns_ok_status(client):
     response = client.get('/')
 
     assert response.status_code == HTTPStatus.OK
