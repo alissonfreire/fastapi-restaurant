@@ -15,6 +15,7 @@ ACCESS_TOKEN_EXPIRE_MINUTES = int(
 class Security:
     pwd_context = PasswordHash.recommended()
 
+    @staticmethod
     def create_access_token(data: dict) -> str:
         to_encode = data.copy()
         expire = datetime.now(tz=ZoneInfo('UTC')) + timedelta(
@@ -24,6 +25,7 @@ class Security:
         encoded_jwt = encode(to_encode, SECRET_KEY, algorithm=ALGORITHM)
         return encoded_jwt
 
+    @staticmethod
     def decode_access_token(token: str) -> dict | None:
         try:
             payload = decode(token, SECRET_KEY, algorithms=[ALGORITHM])
@@ -31,11 +33,14 @@ class Security:
         except DecodeError:
             return None
 
+    @staticmethod
     def get_password_hash(password: str) -> str:
         return Security.pwd_context.hash(password)
 
+    @staticmethod
     def verify_password(plain_password: str, hashed_password: str) -> str:
         return Security.pwd_context.verify(plain_password, hashed_password)
 
+    @staticmethod
     def wrong_password_hash() -> str:
         return os.getenv('WRONG_PASSWORD_HASH')
